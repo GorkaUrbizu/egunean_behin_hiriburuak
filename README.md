@@ -36,7 +36,7 @@ WHERE
   SERVICE wikibase:label { bd:serviceParam wikibase:language "eu" }
 }
 ORDER BY ?countryLabel
-´´´
+```
 
 
 Honek egiten duena da Wikidatako elementuak arakatu, eta honako datuak eskuratzen ditugu konsultarekin.
