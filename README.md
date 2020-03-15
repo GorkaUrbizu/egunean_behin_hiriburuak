@@ -1,27 +1,54 @@
-# Egunean behin laberintoa
-Laberinto bat ausaz sortuko da, ertz bakoitzak kolore bat izango du (koloreekin gehiengoarentzat problema errazten den arren, erantzunetan IE, HE, IM eta HM etiketen laguntzak jarriko dira ikusmen hurritasunen bat dutenek galdera erantzun dezaten), eta lau ertzetako batetik abiatuta, beste ertz bakarrerako bidea egongo da, jokalariak hura topatu beharko du. 
+# Egunean behin wikidata hiriburuak non?
+Munduko herrialde ezberdinetako hiriburuen kokapenari buruzko galderak egin ditugu, Wikipedian oinarrituta. Hiru hiriburu(+herrialde) eman, eta zein hiriburu dagoen [ipar|hego|mendeb|eki]aldeen galdetuko dugu. Horretarako, Wikidatatik hiriburuaren koordenatuak erauzi, eta 3 hiriburu ausaz hartuko dira, eta norabide horretarago (iparralderago adib) kokatzen dena (5ºko marginarekin) izango da erantzun egokia.
 
-![Adibide irudia](https://github.com/gorka_96/egunean_behin_laberintoa/adin.png)
+Zein hiriburu dago Iparralderago?
 
-Ertz berdetik (I-M) abiatuta topatu irisgarri dagoen helmuga: [Irudia 600x400, svg formatuan]
+-Helsinki (Finlandia) [Z]
+-Tokio (Japonia) [O]
+-Lisboa (Portugal) [O]
 
--Urdina (I-E)
--Gorria (H-M)
--Horia (H-E)
+horrela, miloika galdera ezbedin sortu daitezke (4 norazko, 200 herrialde).
 
-horrela, nahi adina galdera sor litezke.
-
-Hobekuntza posibleak:
-
-nahi izanez gero, laberintoaren tamaina ere handitu daiteke, galderaren zailtasuna handitzeko (tamaina handitzearekin batera, puntuen kokapena eta tamaina egokitu behar da.)
-
-Ulermena erraztearren, beti ertz berdinetik hasi liteke, baina, honek erantzuna topatzea erraztuko luke. Hau ez da implementatu, baina erraza behar luke.
+Hurbilpen bera erabili liteke, euskal herriko herriekin, edota, munduko hirien koordenatuak hartu ordez, itsaso mailarekiko altuera erabiliz.
 
 
+## Wikidatako kontsulta
+Wikipediako datuak ateratzeko, Wikidatako Query sisteman kontsulta bat idatzi dugu.:
+
+#List of present-day countries and capital(s) + coordinates
+SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel ?coordinates ?lon ?lat
+WHERE
+{
+  ?country wdt:P31 wd:Q3624078 .
+  #not a former country
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q3024240}
+  #and no an ancient civilisation (needed to exclude ancient Egypt)
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q28171280}
+  ?country wdt:P36 ?capital .
+  ?capital wdt:P625 ?coordinates .
+  ?capital p:P625 ?coordinate .
+  ?coordinate psv:P625 ?coordinate_node .
+  ?coordinate_node wikibase:geoLatitude ?lat .
+  ?coordinate_node wikibase:geoLongitude ?lon .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "eu" }
+}
+ORDER BY ?countryLabel
 
 
-Irudiak png formatuan nahiko balira, hau egin liteke linuxen:
 
-inkscape -z -e out.png -w 600 -h 400 maze.svg
+Honek egiten duena da Wikidatako elementuak arakatu, eta honako datuak eskuratzen ditugu konsultarekin.
+- Herrialdea
+- Hiriburua (herrialdearena)
+- Koordenatuak (hiriburuarenak)
+- Latitudea (koordenatuarenak)
+- Longitudea (koordenatuarenak)
 
-bestalde, kodean aldaketa txikiren bat sortu beharko litzateke.
+## Konsultako datuetatik galderak idaztera
+
+python3 galderakSortu.py 
+
+exekutatuta, csv fitxategitik wikipediatik erauzitako informazioa hartu eta galderak sortuko dira.
+
+100K galdera segundu bakarrean sortzen dira.
+
+Oharra, programak ez du dependentziarik, baina python3.6 behar du, f"string"ak erabiltzeko.
