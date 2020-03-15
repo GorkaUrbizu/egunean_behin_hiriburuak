@@ -1,4 +1,4 @@
-# Egunean behin wikidata hiriburuak non?
+# Egunean behin (wikidata): hiriburuak non?
 Munduko herrialde ezberdinetako hiriburuen kokapenari buruzko galderak egin ditugu, Wikipedian oinarrituta. Hiru hiriburu(+herrialde) eman, eta zein hiriburu dagoen [ipar|hego|mendeb|eki]aldeen galdetuko dugu. Horretarako, Wikidatatik hiriburuaren koordenatuak erauzi, eta 3 hiriburu ausaz hartuko dira, eta norabide horretarago (iparralderago adib) kokatzen dena (5ºko marginarekin) izango da erantzun egokia.
 
 Zein hiriburu dago Iparralderago?
