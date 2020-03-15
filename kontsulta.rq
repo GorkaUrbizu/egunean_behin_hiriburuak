@@ -1,0 +1,18 @@
+#List of present-day countries and capital(s) + coordinates
+SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel ?coordinates ?lon ?lat
+WHERE
+{
+  ?country wdt:P31 wd:Q3624078 .
+  #not a former country
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q3024240}
+  #and no an ancient civilisation (needed to exclude ancient Egypt)
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q28171280}
+  ?country wdt:P36 ?capital .
+  ?capital wdt:P625 ?coordinates .
+  ?capital p:P625 ?coordinate .
+  ?coordinate psv:P625 ?coordinate_node .
+  ?coordinate_node wikibase:geoLatitude ?lat .
+  ?coordinate_node wikibase:geoLongitude ?lon .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "eu" }
+}
+ORDER BY ?countryLabel
