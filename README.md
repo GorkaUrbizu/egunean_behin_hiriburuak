@@ -17,7 +17,7 @@ Hurbilpen bera erabili liteke, euskal herriko herriekin, edota, munduko hirien k
 ## Wikidatako kontsulta
 Wikipediako datuak ateratzeko, Wikidatako Query sisteman kontsulta bat idatzi dugu.:
 
-'''
+```
 #List of present-day countries and capital(s) + coordinates
 SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel ?coordinates ?lon ?lat
 WHERE
@@ -36,7 +36,7 @@ WHERE
   SERVICE wikibase:label { bd:serviceParam wikibase:language "eu" }
 }
 ORDER BY ?countryLabel
-'''
+´´´
 
 
 Honek egiten duena da Wikidatako elementuak arakatu, eta honako datuak eskuratzen ditugu konsultarekin.
