@@ -4,7 +4,9 @@ Munduko herrialde ezberdinetako hiriburuen kokapenari buruzko galderak egin ditu
 Zein hiriburu dago Iparralderago?
 
 -Helsinki (Finlandia) [Z]
+
 -Tokio (Japonia) [O]
+
 -Lisboa (Portugal) [O]
 
 horrela, miloika galdera ezbedin sortu daitezke (4 norazko, 200 herrialde).
